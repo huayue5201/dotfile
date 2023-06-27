@@ -3,7 +3,9 @@
 return {
 	"akinsho/toggleterm.nvim",
 	version = "*",
-	keys = "<c-\\>",
+	keys = {
+		{ "<c-\\>" },
+	},
 	config = function()
 		-- 终端配置
 		require("toggleterm").setup({
@@ -11,6 +13,8 @@ return {
 			-- 终端样式设置vertical/horizontal/tab/float
 			-- 从下面弹出
 			direction = "horizontal",
+			-- neovim更改目录时，终端自动切换目录
+			autochdir = true,
 		})
 
 		-- 切换终端映射

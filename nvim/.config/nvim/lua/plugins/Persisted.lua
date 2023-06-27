@@ -3,9 +3,8 @@
 return {
 	"olimorris/persisted.nvim",
 	keys = {
-		{ "<leader>ss", "<cmd>SessionSave<cr>",   desc = "保存session" },
-		{ "<leader>sd", "<cmd>SessionDelete<cr>", desc = "删除session" },
-		{ "<leader>sg", "<cmd>SessionLoad<cr>",   desc = "加载Git分支session" },
+		{ "<leader>ws", "<cmd>SessionSave<cr>",   desc = "保存session" },
+		{ "<leader>wg", "<cmd>SessionLoad<cr>",   desc = "加载Git分支session" },
 	},
 	opts = {
 		use_git_branch = true,

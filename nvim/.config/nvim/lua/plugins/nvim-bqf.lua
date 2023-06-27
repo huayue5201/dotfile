@@ -3,7 +3,6 @@
 return {
 	"kevinhwang91/nvim-bqf",
 	-- quickfix preview and other functions
-	lazy = true,
 	ft = "qf",
 	dependencies = {
 		{

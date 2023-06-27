@@ -2,13 +2,16 @@
 
 return {
 	"AckslD/nvim-neoclip.lua",
+	event = { "BufReadPost", "BufNewFile" },
 	keys = {
-		{ "<leader>ty", "<cmd>Telescope neoclip<cr>", desc = "剪贴板" },
+		{ "<leader>fy", "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", desc = "剪贴板记录" },
+		{ "<leader>fr", "<cmd>lua require('telescope').extensions.macroscope.default()<cr>", desc = "宏历史记录" },
 	},
 	dependencies = {
-		{ "kkharji/sqlite.lua" },
+		-- https://github.com/kkharji/sqlite.lua
+		"kkharji/sqlite.lua",
 		-- you'll need at least one of these
-		{ "nvim-telescope/telescope.nvim" },
+		"nvim-telescope/telescope.nvim",
 		-- {'ibhagwan/fzf-lua'},
 	},
 	config = function()
@@ -34,6 +37,12 @@ return {
 			continuous_sync = true,
 			-- 类容格式
 			content_spec_column = true,
+			-- 剪切寄存器名称
+			default_register = { '"', "*", "+" },
+			-- 开启宏保存
+			enable_macro_history = true,
+			-- 宏使用的寄存器
+			default_register_macros = "q",
 			-- 不要存储空白yanks
 			-- 过滤空白yanks
 			filter = function(data)

@@ -7,15 +7,9 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		{
-			-- https://github.com/williamboman/mason.nvim
-			"williamboman/mason.nvim",
-			build = ":MasonUpdate", -- :MasonUpdate updates registry contents
-			cmd = { "Mason", "MasonUpdate" },
-			opts = {
-				ui = { border = "double" },
-			},
-		},
+		"nvim-telescope/telescope.nvim",
+		"williamboman/mason.nvim",
+		"jose-elias-alvarez/null-ls.nvim",
 	},
 	config = function()
 		local lspconfig = require("lspconfig")
@@ -31,10 +25,27 @@ return {
 		-- Set up lspconfig.
 		local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+		-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+		local servers = { "rust_analyzer", "tsserver", "lua_ls" }
+		for _, lsp in ipairs(servers) do
+			lspconfig[lsp].setup({
+				-- on_attach = my_custom_on_attach,
+				capabilities = { cmp_capabilities, fold_capabilities },
+			})
+		end
+
+		-- 加载lsp配置文件 lua/lsp/...
+		require("lsp.lua_ls")
+		require("lsp.rust_analyzer")
+
 		-- 查看当前buffer内诊断问题
-		vim.keymap.set("n", "<space>we", vim.diagnostic.setloclist)
+
+		vim.keymap.set("n", "<space>tb", vim.diagnostic.setloclist)
 		-- 查看当前workspace内诊断问题
-		vim.keymap.set("n", "<leader>wo", require("telescope.builtin").diagnostics)
+		vim.keymap.set("n", "<leader>tw", require("telescope.builtin").diagnostics)
+		-- 问题跳转
+		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+		vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -47,45 +58,21 @@ return {
 				local opts = { buffer = ev.buf }
 
 				-- Code action
-				vim.keymap.set({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
-				-- Rename all occurrences of the hovered word for the selected files
-				vim.keymap.set("n", "gR", "<cmd>Lspsaga rename ++project<CR>", opts)
-				-- Rename all occurrences of the hovered word for the entire file
-				vim.keymap.set("n", "rn", "<cmd>Lspsaga rename<CR>", opts)
-				-- 悬浮窗查看定义
-				vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", opts)
+				vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+				-- 重命名
+				vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+				-- 查看引用
+				vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, opts)
 				-- 跳转到实现
-				vim.keymap.set("n", "gr", require("telescope.builtin").lsp_implementations, opts)
+				vim.keymap.set("n", "gi", require("telescope.builtin").lsp_implementations, opts)
 				-- 跳转到定义
 				vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, opts)
 				-- 跳转到类型定义
 				vim.keymap.set("n", "gt", require("telescope.builtin").lsp_type_definitions, opts)
-				-- 诊断跳跃
-				-- You can use <C-o> to jump back to your previous location
-				vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
-				vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-				-- 利用过滤器跳跃，只跳转到错误
-				vim.keymap.set("n", "[E", function()
-					require("lspsaga.diagnostic"):goto_prev({
-						severity = vim.diagnostic.severity.ERROR,
-					})
-				end, opts)
-				vim.keymap.set("n", "]E", function()
-					require("lspsaga.diagnostic"):goto_next({
-						severity = vim.diagnostic.severity.ERROR,
-					})
-				end, opts)
-				-- 动态列出工作区所有的lsp符号
-				vim.keymap.set("n", "<leader>fl", "<cmd>Telescope aerial<cr>", opts)
-				-- Toggle outline
-				vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>", opts)
+				-- 列出工作区所有的lsp符号
+				vim.keymap.set("n", "<leader>fl", "<cmd>Telescope lsp_workspace_symbols<cr>", opts)
 				-- Hover Doc
-				vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
-				-- 悬浮窗查看hover_doc
-				vim.keymap.set("n", "<C-k>", "<cmd>Lspsaga hover_doc ++keep<CR>", opts)
-				-- Call hierarchy
-				vim.keymap.set("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", opts)
-				vim.keymap.set("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", opts)
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 				-- 添加workspace
 				vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
 				-- workspace重命名
@@ -95,14 +82,14 @@ return {
 					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 				end, opts)
 				-- 格式化当前buffer界面
-				vim.keymap.set("n", "<space>r", function()
+				vim.keymap.set("n", ";f", function()
 					vim.lsp.buf.format({ async = true })
 				end, opts)
 			end,
 		})
 
 		-- 诊断图标
-		local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+		local signs = { Error = "", Warn = "", Hint = "󰌶", Info = "" }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -112,51 +99,11 @@ return {
 		vim.diagnostic.config({
 			virtual_text = {
 				source = "always", -- Or "if_many"
+				prefix = "■", -- Could be '●', '▎', 'x'
 			},
 			float = {
 				source = "always", -- Or "if_many"
 			},
 		})
-
-		-- lsp服务器配置
-		local language_servers = require("lspconfig").util.available_servers()
-		for _, ls in ipairs(language_servers) do
-			require("lspconfig")[ls].setup({
-				capabilities = cmp_capabilities,
-				capabilities = fold_capabilities,
-				-- you can add other fields for setting up lsp server in this table
-			})
-		end
-
-		-- lua
-		require("lspconfig").lua_ls.setup({
-			settings = {
-				Lua = {
-					runtime = {
-						version = "LuaJIT",
-					},
-					diagnostics = {
-						-- Get the language server to recognize the `vim` global
-						globals = { "vim" },
-					},
-					workspace = {
-						-- Make the server aware of Neovim runtime files
-						library = vim.api.nvim_get_runtime_file("", true),
-					},
-					-- Do not send telemetry data containing a randomized but unique identifier
-					telemetry = {
-						enable = false,
-					},
-					-- 格式化
-					format = {
-						-- 禁用
-						enable = false,
-					},
-				},
-			},
-		})
-
-		-- https://github.com/rust-lang/rust-analyzer
-		require("lspconfig").rust_analyzer.setup({})
 	end,
 }

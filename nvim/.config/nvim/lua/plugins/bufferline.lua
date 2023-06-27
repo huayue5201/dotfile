@@ -2,7 +2,7 @@
 
 return {
 	"akinsho/bufferline.nvim",
-	lazy = false,
+	event = "VeryLazy", -- keep for lazy loading
 	version = "*",
 	opts = {
 		options = {

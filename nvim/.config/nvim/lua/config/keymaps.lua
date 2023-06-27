@@ -1,7 +1,7 @@
--- 退出
-vim.keymap.set("n", "<leader>q", "<cmd>q<cr>")
 -- 保存
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
+vim.keymap.set("n", ";s", "<cmd>w<cr>")
+-- 退出
+vim.keymap.set("n", ";q", "<cmd>q<cr>")
 
 -- 代码块缩进
 vim.keymap.set("v", ">", ">gv")
@@ -17,14 +17,7 @@ vim.keymap.set("n", "<TAB>", "<cmd>BufferLineCycleNext<cr>")
 vim.keymap.set("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<cr>")
 
 -- 一键全选
-vim.keymap.set("n", "<leader>gg", "ggVG")
-
--- 手动开启拼写检查
-vim.keymap.set("n", "<leader>sp", "<cmd>setlocal spell! spelllang=en_us<cr>")
-
--- 复制到"*"\"+"寄存器
-vim.keymap.set("n", "<leader>y", '"+y')
-vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", ";gg", "ggVG")
 
 -- 正常模式下按 ESC 取消高亮显示
 vim.keymap.set("n", "<ESC>", "<cmd>nohlsearch<cr>")

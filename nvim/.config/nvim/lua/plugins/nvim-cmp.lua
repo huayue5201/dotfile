@@ -8,20 +8,13 @@ return {
 	-- dependencies are always lazy-loaded unless specified otherwise
 	dependencies = {
 		"onsails/lspkind.nvim",
+		-- https://github.com/hrsh7th/cmp-nvim-lsp
 		"hrsh7th/cmp-nvim-lsp",
+		-- https://github.com/hrsh7th/cmp-buffer
 		"hrsh7th/cmp-buffer",
+		-- https://github.com/hrsh7th/cmp-path
 		"hrsh7th/cmp-path",
-		"ray-x/cmp-treesitter",
-		"lukas-reineke/cmp-rg",
-		{
-			-- https://github.com/L3MON4D3/LuaSnip
-			"L3MON4D3/LuaSnip",
-			-- follow latest release.
-			version = "<CurrentMajor>.*",
-			-- install jsregexp (optional!).
-			build = "make install_jsregexp",
-		},
-		"saadparwaiz1/cmp_luasnip",
+		"L3MON4D3/LuaSnip",
 	},
 	config = function()
 		local has_words_before = function()
@@ -40,20 +33,38 @@ return {
 		local cmp = require("cmp")
 
 		cmp.setup({
-			-- 代码片段引擎hrsh7th/nvim-cmp
+			-- 代码片段引擎L3MON4D3/LuaSnip
 			snippet = {
 				-- REQUIRED - you must specify a snippet engine
 				expand = function(args)
 					require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
 				end,
 			},
+
+			-- sources列表
+			sources = cmp.config.sources({
+				{ name = "nvim_lsp" },
+				{ name = "buffer" },
+				{ name = "luasnip" }, -- For luasnip users.
+				{ name = "path" },
+				{ name = "crates" },
+			}),
+
 			window = {
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
 			},
 
-			mapping = {
-				-- ... Your other mappings ...
+			mapping = cmp.mapping.preset.insert({
+				["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
+				["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
+				-- C-b (back) C-f (forward) for snippet placeholder navigation.
+				["<C-Space>"] = cmp.mapping.complete(),
+				["<C-c>"] = cmp.mapping.abort(),
+				["<CR>"] = cmp.mapping.confirm({
+					behavior = cmp.ConfirmBehavior.Replace,
+					select = true,
+				}),
 
 				-- 该映射增加类tabout插件的支持
 				["<Tab>"] = function(fallback)
@@ -79,30 +90,7 @@ return {
 					end
 				end,
 
-				-- 回车键选中
-				["<CR>"] = cmp.mapping({
-					i = function(fallback)
-						if cmp.visible() and cmp.get_active_entry() then
-							cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-						else
-							fallback()
-						end
-					end,
-					s = cmp.mapping.confirm({ select = true }),
-					c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-				}),
-
 				-- ... Your other mappings ...
-			},
-
-			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" }, -- For luasnip users.
-				{ name = "buffer" },
-				{ name = "cmp-path" },
-				{ name = "treesitter" },
-				{ name = "rg" },
-				{ name = "crates" },
 			}),
 
 			-- lspkind图标支持
@@ -122,7 +110,7 @@ return {
 			},
 		})
 
-		-- autopairs配置
+		-- windwp/nvim-autopairs
 		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 	end,
 }

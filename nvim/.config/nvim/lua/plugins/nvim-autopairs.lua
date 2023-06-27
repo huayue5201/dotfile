@@ -2,7 +2,6 @@
 
 return {
 	"windwp/nvim-autopairs",
-	lazy = true,
 	config = function()
 		-- 集成treesitter插件
 		local npairs = require("nvim-autopairs")

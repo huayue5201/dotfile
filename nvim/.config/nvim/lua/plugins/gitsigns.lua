@@ -5,7 +5,6 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("gitsigns").setup({
-			-- 按键映射
 			on_attach = function(bufnr)
 				local gs = package.loaded.gitsigns
 
@@ -37,27 +36,28 @@ return {
 				end, { expr = true })
 
 				-- Actions
+				-- 提交改动
 				map("n", "<leader>hs", gs.stage_hunk)
-				map("n", "<leader>hr", gs.reset_hunk)
 				map("v", "<leader>hs", function()
 					gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
+				-- 提交当前buffer改动
+				map("n", "<leader>hS", gs.stage_buffer)
+				-- 重置所有改动
+				map("n", "<leader>hr", gs.reset_hunk)
 				map("v", "<leader>hr", function()
 					gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
-				map("n", "<leader>hS", gs.stage_buffer)
-				map("n", "<leader>hu", gs.undo_stage_hunk)
+				-- 重置当前buffer改动
 				map("n", "<leader>hR", gs.reset_buffer)
+				-- 撤销提交
+				map("n", "<leader>hu", gs.undo_stage_hunk)
+				-- 浮窗查看改动
 				map("n", "<leader>hp", gs.preview_hunk)
+				-- 浮窗查看提交信息
 				map("n", "<leader>hb", function()
 					gs.blame_line({ full = true })
 				end)
-				map("n", "<leader>tb", gs.toggle_current_line_blame)
-				map("n", "<leader>hd", gs.diffthis)
-				map("n", "<leader>hD", function()
-					gs.diffthis("~")
-				end)
-				map("n", "<leader>td", gs.toggle_deleted)
 
 				-- Text object
 				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")

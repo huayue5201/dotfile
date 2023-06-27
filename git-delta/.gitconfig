@@ -1,0 +1,27 @@
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+	 minus-style = red bold ul "#ffeeee"
+	 ; 开启行号
+	 line-numbers = true
+    ; navigate = true    # use n and N to move between diff sections
+    ; 并排视图
+    side-by-side = true
+    ; line-numbers-left-format = ""
+    ; 并排隔离符号
+    line-numbers-right-format = "│ "
+	 ; 真彩色
+	 true-color = always
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+[user]
+	name = huayue
+	email = 369230782@qq.com

@@ -1,5 +1,4 @@
 -- https://github.com/Mofiqul/dracula.nvim
-
 -- 主题配置
 
 return {

@@ -5,8 +5,9 @@ return {
 	build = ":TSUpdate",
 	event = { "BufReadPost", "BufNewFile" },
 	dependencies = {
-		{ "JoosepAlviste/nvim-ts-context-commentstring" },
-		{ "nvim-treesitter/nvim-treesitter-textobjects" },
+		-- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
 	config = function()
 		require("nvim-treesitter.configs").setup({
@@ -28,12 +29,6 @@ return {
 			-- JoosepAlviste/nvim-ts-context-commentstring
 			context_commentstring = {
 				enable = true,
-			},
-			-- andymass/vim-matchup集成
-			matchup = {
-				enable = true, -- mandatory, false will disable the whole extension
-				-- disable = { "c", "ruby" }, -- optional, list of language that will be disabled
-				-- [options]
 			},
 			-- 高亮模块配置
 			highlight = {
@@ -57,7 +52,7 @@ return {
 					scope_incremental = "<TAB>",
 				},
 			},
-			-- object模块
+			-- nvim-treesitter/nvim-treesitter-textobjects
 			textobjects = {
 				select = {
 					enable = true,

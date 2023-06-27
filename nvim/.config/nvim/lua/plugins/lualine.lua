@@ -2,7 +2,7 @@
 
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = false,
+	event = "VeryLazy", -- keep for lazy loading
 	config = function()
 		require("lualine").setup({
 			options = {
@@ -30,15 +30,6 @@ return {
 						require("noice").api.status.search.get,
 						cond = require("noice").api.status.search.has,
 						color = { fg = "#ff9e64" },
-					},
-				},
-				lualine_b = {
-					{
-						function()
-							local key = require("grapple").key()
-							return "  [" .. key .. "]"
-						end,
-						cond = require("grapple").exists,
 					},
 				},
 			},

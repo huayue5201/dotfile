@@ -3,12 +3,15 @@
 return {
 	"nvim-neorg/neorg",
 	build = ":Neorg sync-parsers",
+	dependencies = "nvim-lua/plenary.nvim",
 	ft = "norg",
-	dependencies = { { "nvim-lua/plenary.nvim" } },
 	opts = {
 		load = {
+			-- 基础模块
 			["core.defaults"] = {}, -- Loads default behaviour
+			-- 标记图标渲染
 			["core.concealer"] = {}, -- Adds pretty icons to your documents
+			-- neorg workspaces管理
 			["core.dirman"] = { -- Manages Neorg workspaces
 				config = {
 					workspaces = {

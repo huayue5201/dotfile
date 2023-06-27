@@ -3,7 +3,6 @@
 
 return {
 	"kylechui/nvim-surround",
-	lazy = true,
 	keys = { "cs", "ds", "ys" },
 	config = true,
 }

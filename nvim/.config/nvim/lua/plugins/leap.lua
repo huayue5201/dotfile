@@ -3,10 +3,9 @@
 
 return {
 	"ggandor/leap.nvim",
-	lazy = true,
-	event = { "BufReadPre", "BufNewFile" },
+	keys = { "s", "S", "f", "F", "t", "T" },
 	dependencies = {
-		{ "tpope/vim-repeat" },
+		"tpope/vim-repeat",
 		{
 			"ggandor/flit.nvim",
 			keys = { f = "f", F = "F", t = "t", T = "T" },

@@ -3,8 +3,8 @@
 return {
 	"kevinhwang91/nvim-ufo",
 	keys = {
-		{ "<leader>zo", "<cmd>UfoEnable<cr>", desc = "启动折叠" },
-		{ "<leader>zd", "<cmd>UfoDisable<cr>", desc = "启动折叠" },
+		{ ";zo", "<cmd>UfoEnable<cr>", desc = "启动折叠" },
+		{ ";zd", "<cmd>UfoDisable<cr>", desc = "启动折叠" },
 	},
 	dependencies = "kevinhwang91/promise-async",
 	config = function()
@@ -18,7 +18,7 @@ return {
 		vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 		vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
 		vim.keymap.set("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
-		vim.keymap.set("n", "K", function()
+		vim.keymap.set("n", ";k", function()
 			local winid = require("ufo").peekFoldedLinesUnderCursor()
 			if not winid then
 				-- choose one of coc.nvim and nvim lsp
@@ -62,22 +62,9 @@ return {
 			open_fold_hl_timeout = 150,
 			close_fold_kinds = { "imports", "comment" },
 			preview = {
-				win_config = {
-					border = { "", "─", "", "", "", "─", "", "" },
-					winhighlight = "Normal:Folded",
-					winblend = 0,
-				},
 				mappings = {
-					scrollU = "<C-u>",
-					scrollD = "<C-d>",
 					jumpTop = "[",
 					jumpBot = "]",
-				},
-			},
-			win_config = {
-				-- 预览边框
-				border = {
-					default = "rounded",
 				},
 			},
 		})

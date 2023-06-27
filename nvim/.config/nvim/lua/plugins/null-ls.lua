@@ -2,17 +2,29 @@
 
 return {
 	"jose-elias-alvarez/null-ls.nvim",
-	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local null_ls = require("null-ls")
+		-- 格式化sources
+		local formatting = null_ls.builtins.formatting
+		-- 诊断sources
+		local diagnostics = null_ls.builtins.diagnostics
+		-- code补全searches
+		local completion = null_ls.builtins.completion
+		-- 悬停文档sources
+		local hover = null_ls.builtins.hover
+		-- code actions sources
+		local code_actions = null_ls.builtins.code_actions
 
 		-- sources
 		local sources = {
 			-- https://github.com/dprint/dprint
 			-- 格式化框架
-			null_ls.builtins.formatting.dprint,
+			formatting.dprint,
 			-- https://github.com/JohnnyMorganz/StyLua
-			null_ls.builtins.formatting.stylua,
+			formatting.stylua,
+			-- https://www.html-tidy.org
+			formatting.tidy,
+			diagnostics.tidy,
 		}
 
 		-- 注册sources
@@ -22,3 +34,5 @@ return {
 
 -- sources列表
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#formatting
+-- sources设置
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md

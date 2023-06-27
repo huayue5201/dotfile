@@ -2,13 +2,15 @@
 
 return {
 	"folke/noice.nvim",
-	lazy = false,
+	event = "VeryLazy", -- keep for lazy loading
 	keys = {
 		{ "<leader>nd", "<cmd>Noice dismiss<cr>", desc = "清除所有消息" },
-		{ "<leader>tn", "<cmd>Noice telescope<cr>", desc = "查看历史消息" },
+		{ "<leader>tn", "<cmd>Noice<cr>", desc = "查看历史消息" },
 	},
 	dependencies = {
+		-- https://github.com/MunifTanjim/nui.nvim
 		"MunifTanjim/nui.nvim",
+		-- https://github.com/rcarriga/nvim-notify
 		"rcarriga/nvim-notify",
 	},
 	config = function()
