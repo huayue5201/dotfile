@@ -5,7 +5,7 @@ return {
 	cmd = { "Mason", "MasonUpdate", "LspInstall" },
 	opts = {
 		-- 只接受lsp服务器名称
-		ensure_installed = { "lua_ls", "rust_analyzer" },
+		ensure_installed = { "lua_ls", "rust_analyzer", "tsserver" },
 	},
 	dependencies = { "williamboman/mason.nvim" },
 }

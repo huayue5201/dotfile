@@ -17,7 +17,7 @@ shell:
 
 window:
   # 透明
-  opacity: 0.7
+  opacity: 0.8
   # 窗口大小
   dimensions:
     columns: 150

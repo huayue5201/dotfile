@@ -35,6 +35,7 @@ return {
 
 		-- 加载lsp配置文件 lua/lsp/...
 		require("lsp.lua_ls")
+		require("lsp.tsserver")
 		require("lsp.rust_analyzer")
 
 		-- 查看当前buffer内错误
