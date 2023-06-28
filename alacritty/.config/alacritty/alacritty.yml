@@ -16,11 +16,12 @@ shell:
     - -l
 
 window:
+  # 透明
+  opacity: 0.7
   # 窗口大小
   dimensions:
     columns: 150
     lines: 60
-
   # 边缘空白
   padding:
     x: 10

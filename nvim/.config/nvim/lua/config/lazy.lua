@@ -22,7 +22,7 @@ require("lazy").setup({
 	},
 	ui = { border = "double" },
 	defaults = { lazy = true, version = false }, -- always use the latest git commit
-	install = { colorscheme = { "aurora" } },
+	install = { colorscheme = { "onedark" } },
 	-- checker = { enabled = true },-- 自动更新
 	performance = {
 		rtp = {

@@ -5,10 +5,6 @@ return {
 	event = "VeryLazy", -- keep for lazy loading
 	config = function()
 		require("lualine").setup({
-			options = {
-				-- 主题Mofiqul/dracula.nvim
-				theme = "dracula-nvim",
-			},
 			sections = {
 				-- noice集成配置
 				lualine_x = {

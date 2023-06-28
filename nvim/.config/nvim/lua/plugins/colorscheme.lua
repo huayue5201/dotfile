@@ -1,13 +1,21 @@
--- https://github.com/Mofiqul/dracula.nvim
+-- https://github.com/navarasu/onedark.nvim
 -- 主题配置
 
 return {
 	{
-		"Mofiqul/dracula.nvim",
+		"navarasu/onedark.nvim",
 		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			vim.cmd([[colorscheme dracula]])
+			require("onedark").setup({
+				-- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+				style = "darker",
+				-- Lualine options --
+				lualine = {
+					transparent = true, -- lualine center bar transparency
+				},
+			})
+			require("onedark").load()
 		end,
 	},
 }

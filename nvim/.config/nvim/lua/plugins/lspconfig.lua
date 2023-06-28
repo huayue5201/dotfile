@@ -7,8 +7,7 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"nvim-telescope/telescope.nvim",
-		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
 		"jose-elias-alvarez/null-ls.nvim",
 	},
 	config = function()

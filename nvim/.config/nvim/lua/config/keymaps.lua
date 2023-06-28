@@ -1,7 +1,5 @@
 -- 保存
-vim.keymap.set("n", ";s", "<cmd>w<cr>")
--- 退出
-vim.keymap.set("n", ";q", "<cmd>q<cr>")
+vim.keymap.set("n", ";s", "<cmd>w<cr>", { desc = "保存" })
 
 -- 代码块缩进
 vim.keymap.set("v", ">", ">gv")
@@ -17,7 +15,7 @@ vim.keymap.set("n", "<TAB>", "<cmd>BufferLineCycleNext<cr>")
 vim.keymap.set("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<cr>")
 
 -- 一键全选
-vim.keymap.set("n", ";gg", "ggVG")
+vim.keymap.set("n", ";gg", "ggVG", { desc = "全选" })
 
 -- 正常模式下按 ESC 取消高亮显示
 vim.keymap.set("n", "<ESC>", "<cmd>nohlsearch<cr>")
