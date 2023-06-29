@@ -22,9 +22,6 @@ return {
 			formatting.dprint,
 			-- https://github.com/JohnnyMorganz/StyLua
 			formatting.stylua,
-			-- https://www.html-tidy.org
-			formatting.tidy,
-			diagnostics.tidy,
 		}
 
 		-- 注册sources
