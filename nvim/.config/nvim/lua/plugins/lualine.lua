@@ -4,6 +4,9 @@ return {
 	"nvim-lualine/lualine.nvim",
 	event = "VeryLazy", -- keep for lazy loading
 	config = function()
+		-- 禁用 showmode， lualine 已经显示了当前模式
+		vim.opt.showmode = false
+
 		-- 在较小的窗口中禁用组件显示
 		local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
 			return function(str)
@@ -18,6 +21,11 @@ return {
 		end
 
 		require("lualine").setup({
+			options = {
+				theme = "auto",
+				component_separators = { left = "󰷫", right = "" },
+				  section_separators = { left = '', right = ''},
+			},
 			sections = {
 				-- noice集成配置
 				lualine_x = {
@@ -43,7 +51,6 @@ return {
 				},
 				lualine_a = {
 					{ "mode", fmt = trunc(80, 4, nil, true) },
-					-- { "filename", fmt = trunc(90, 30, 50) },
 					{
 						function()
 							return require("lsp-status").status()

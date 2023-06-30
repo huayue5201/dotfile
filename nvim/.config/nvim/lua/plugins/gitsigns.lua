@@ -15,25 +15,25 @@ return {
 				end
 
 				-- Navigation
-				map("n", "]c", function()
+				map("n", "]g", function()
 					if vim.wo.diff then
-						return "]c"
+						return "]g"
 					end
 					vim.schedule(function()
 						gs.next_hunk()
 					end)
 					return "<Ignore>"
-				end, { expr = true })
+				end, { desc = "跳转到下一处改动" }, { expr = true })
 
-				map("n", "[c", function()
+				map("n", "[g", function()
 					if vim.wo.diff then
-						return "[c"
+						return "[g"
 					end
 					vim.schedule(function()
 						gs.prev_hunk()
 					end)
 					return "<Ignore>"
-				end, { expr = true })
+				end, { desc = "跳转到上一处改动" }, { expr = true })
 
 				-- Actions
 				map("n", "<leader>hs", gs.stage_hunk, { desc = "提交当前改动" })

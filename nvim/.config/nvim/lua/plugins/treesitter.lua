@@ -7,7 +7,9 @@ return {
 	dependencies = {
 		-- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
 		"JoosepAlviste/nvim-ts-context-commentstring",
+		-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		"nvim-treesitter/nvim-treesitter-context",
 	},
 	config = function()
 		require("nvim-treesitter.configs").setup({
@@ -54,9 +56,17 @@ return {
 			},
 			-- nvim-treesitter/nvim-treesitter-textobjects
 			textobjects = {
+				lsp_interop = {
+					enable = true,
+					border = "none",
+					floating_preview_opts = {},
+					peek_definition_code = {
+						["<leader>gf"] = "@function.outer",
+						["<leader>gF"] = "@class.outer",
+					},
+				},
 				select = {
 					enable = true,
-
 					-- Automatically jump forward to textobj, similar to targets.vim
 					lookahead = true,
 
