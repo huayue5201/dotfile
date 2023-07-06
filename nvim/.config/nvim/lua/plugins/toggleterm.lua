@@ -32,7 +32,7 @@ return {
 		vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
 		-- 打开或关闭所有终端
-		vim.keymap.set("n", "<C-s>", "<cmd>ToggleTermToggleAll<CR>")
-		vim.keymap.set("t", "<C-s>", "<cmd>ToggleTermToggleAll<CR>")
+		vim.keymap.set("n", "<C-x>", "<cmd>ToggleTermToggleAll<CR>")
+		vim.keymap.set("t", "<C-x>", "<cmd>ToggleTermToggleAll<CR>")
 	end,
 }

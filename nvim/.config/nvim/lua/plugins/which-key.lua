@@ -16,8 +16,8 @@ return {
 			["<cr>"] = "RET",
 			["<tab>"] = "TAB",
 		},
-		window = {
-			border = "double", -- none, single, double, shadow
-		},
+		-- window = {
+		-- 	border = "double", -- none, single, double, shadow
+		-- },
 	},
 }

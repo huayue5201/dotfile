@@ -20,7 +20,7 @@ vim.bo.softtabstop = 3
 -- 继承前一行的缩进方式
 vim.g.autoindent = true
 -- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
+vim.o.termguicolors = true
 -- 设定各种文本的字符编码
 vim.o.encoding = "utf-8"
 -- 状态栏样式配置(1、2 、3)

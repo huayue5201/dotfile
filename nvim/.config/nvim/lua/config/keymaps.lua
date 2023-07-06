@@ -9,11 +9,6 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("n", "<C-q>", "<cmd>bdelete<cr>")
 -- 关闭当前终端
 vim.keymap.set("t", "<C-q>", "<cmd>bdelete<cr>")
--- 切换到下一个buffer
-vim.keymap.set("n", "<TAB>", "<cmd>BufferLineCycleNext<cr>")
--- 切换到上一个buffer
-vim.keymap.set("n", "<S-TAB>", "<cmd>BufferLineCyclePrev<cr>")
-
 -- 一键全选
 vim.keymap.set("n", ";gg", "ggVG", { desc = "全选" })
 

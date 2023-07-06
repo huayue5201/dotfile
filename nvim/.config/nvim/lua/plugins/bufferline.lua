@@ -4,6 +4,12 @@ return {
 	"akinsho/bufferline.nvim",
 	event = "VeryLazy", -- keep for lazy loading
 	version = "*",
+	keys = {
+		-- 切换到下一个buffer
+		{ "<TAB>", "<cmd>BufferLineCycleNext<cr>" },
+		-- 切换到上一个buffer
+		{ "<S-TAB>", "<cmd>BufferLineCyclePrev<cr>" },
+	},
 	opts = {
 		options = {
 			toggle_hidden_on_enter = true,

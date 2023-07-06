@@ -31,7 +31,7 @@ window:
   # 窗口修饰
   # - full: 有边界 + 标题栏
   # - none: 无边界 + 标题栏
-  decorations: full
+  decorations: buttonless
 
 scrolling:
   # 历史保留行数

@@ -50,16 +50,17 @@ return {
 				{ name = "crates" },
 			}),
 
-			window = {
-				completion = cmp.config.window.bordered(),
-				documentation = cmp.config.window.bordered(),
-			},
+			-- window = {
+			-- 	-- 边框线
+			-- 	completion = cmp.config.window.bordered(),
+			-- 	documentation = cmp.config.window.bordered(),
+			-- },
 
 			mapping = cmp.mapping.preset.insert({
 				["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
 				["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
 				-- C-b (back) C-f (forward) for snippet placeholder navigation.
-				["<C-Space>"] = cmp.mapping.complete(),
+				["<C-k>"] = cmp.mapping.complete(),
 				["<C-c>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping.confirm({
 					behavior = cmp.ConfirmBehavior.Replace,

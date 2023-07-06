@@ -10,6 +10,8 @@ return {
 			require("onedark").setup({
 				-- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
 				style = "darker",
+				-- 关闭/隐藏背景色
+				transparent = false,
 				-- Lualine options --
 				lualine = {
 					transparent = true, -- lualine center bar transparency

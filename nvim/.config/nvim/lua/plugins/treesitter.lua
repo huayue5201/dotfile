@@ -61,8 +61,8 @@ return {
 					border = "none",
 					floating_preview_opts = {},
 					peek_definition_code = {
-						["<leader>gf"] = "@function.outer",
-						["<leader>gF"] = "@class.outer",
+						["<leader>k"] = "@function.outer",
+						["<leader>K"] = "@class.outer",
 					},
 				},
 				select = {

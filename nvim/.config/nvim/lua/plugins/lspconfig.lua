@@ -38,6 +38,26 @@ return {
 		require("lsp.tsserver")
 		require("lsp.rust_analyzer")
 
+		-- 诊断图标
+		local signs = { Error = "", Warn = "", Hint = "󰌶", Info = "" }
+		for type, icon in pairs(signs) do
+			local hl = "DiagnosticSign" .. type
+			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+		end
+
+		-- 显示诊断来源
+		vim.diagnostic.config({
+			virtual_text = {
+				source = "always", -- Or "if_many"
+				prefix = "■", -- Could be '●', '▎', 'x'
+			},
+			float = {
+				source = "always", -- Or "if_many"
+			},
+		})
+
+		-- keys
+
 		-- 查看当前buffer内错误
 		vim.keymap.set("n", "<space>tb", vim.diagnostic.setloclist, { desc = "查看当前buffer内错误" })
 		-- 查看所有错误
@@ -132,24 +152,6 @@ return {
 					vim.lsp.buf.format({ async = true })
 				end, { desc = "代码格式化" }, opts)
 			end,
-		})
-
-		-- 诊断图标
-		local signs = { Error = "", Warn = "", Hint = "󰌶", Info = "" }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-		end
-
-		-- 显示诊断来源
-		vim.diagnostic.config({
-			virtual_text = {
-				source = "always", -- Or "if_many"
-				prefix = "■", -- Could be '●', '▎', 'x'
-			},
-			float = {
-				source = "always", -- Or "if_many"
-			},
 		})
 	end,
 }
