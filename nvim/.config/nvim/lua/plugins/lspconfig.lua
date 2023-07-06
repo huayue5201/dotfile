@@ -20,6 +20,9 @@ return {
 			lineFoldingOnly = true,
 		}
 
+		-- 回调函数
+		local on_attach = function(client, bufnr) end
+
 		-- nvim-cmp
 		-- Set up lspconfig.
 		local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()

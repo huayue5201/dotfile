@@ -5,10 +5,6 @@ vim.keymap.set("n", ";s", "<cmd>w<cr>", { desc = "保存" })
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "<", "<gv")
 
--- 关闭当前buffer
-vim.keymap.set("n", "<C-q>", "<cmd>bdelete<cr>")
--- 关闭当前终端
-vim.keymap.set("t", "<C-q>", "<cmd>bdelete<cr>")
 -- 一键全选
 vim.keymap.set("n", ";gg", "ggVG", { desc = "全选" })
 
