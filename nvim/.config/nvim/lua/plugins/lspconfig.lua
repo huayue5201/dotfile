@@ -1,7 +1,7 @@
 -- https://github.com/neovim/nvim-lspconfig
 
 -- lsp source列表
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
 return {
 	"neovim/nvim-lspconfig",
@@ -28,7 +28,7 @@ return {
 		local cmp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 		-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-		local servers = { "rust_analyzer", "tsserver", "lua_ls" }
+		local servers = { "rust_analyzer", "tsserver", "lua_ls", "emmet_ls" }
 		for _, lsp in ipairs(servers) do
 			lspconfig[lsp].setup({
 				-- on_attach = my_custom_on_attach,
@@ -40,6 +40,7 @@ return {
 		require("lsp.lua_ls")
 		require("lsp.tsserver")
 		require("lsp.rust_analyzer")
+		require("lsp.emmet_ls")
 
 		-- 诊断图标
 		local signs = { Error = "", Warn = "", Hint = "󰌶", Info = "" }
