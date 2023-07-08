@@ -1,4 +1,6 @@
 # zoxide
+# alias j=__zoxide_z
+alias zf=__zoxide_zi
 eval "$(zoxide init zsh)"
 
 # exa配置
