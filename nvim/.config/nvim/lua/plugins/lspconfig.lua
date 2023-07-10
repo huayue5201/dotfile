@@ -40,7 +40,6 @@ return {
 		require("lsp.lua_ls")
 		require("lsp.tsserver")
 		require("lsp.rust_analyzer")
-		require("lsp.emmet_ls")
 		require("lsp.taplo")
 
 		-- 诊断图标
