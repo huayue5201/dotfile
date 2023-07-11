@@ -45,12 +45,30 @@ return {
 			},
 			-- UI配置
 			pickers = {
+				-- 文件索引
+				find_files = {
+					-- prompt_prefix = "🔍",
+				},
+				-- buffers索引
 				buffers = {
+					-- prompt_prefix = "🔍",
 					mappings = {
 						i = {
 							["<c-d>"] = actions.delete_buffer + actions.move_to_top,
 						},
 					},
+				},
+				-- 浏览历史索引
+				oldfiles = {
+					-- prompt_prefix = "🔍",
+				},
+				-- 字符索引
+				live_grep = {
+					-- prompt_prefix = "🔍",
+				},
+				-- 历史命令索引
+				command_history = {
+					-- prompt_prefix = "🔍",
 				},
 			},
 			extensions = {

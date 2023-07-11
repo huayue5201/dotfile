@@ -5,6 +5,9 @@ vim.keymap.set("n", ";s", "<cmd>w<cr>", { desc = "保存" })
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "<", "<gv")
 
+-- 删除所有标记
+vim.keymap.set("n", "dm", "<cmd>delmarks!<cr>", { desc = "删除所有标记" })
+
 -- 一键全选
 vim.keymap.set("n", ";gg", "ggVG", { desc = "全选" })
 
