@@ -27,6 +27,8 @@ vim.o.encoding = "utf-8"
 vim.o.laststatus = 3
 -- 是否支持鼠标操作
 vim.o.mouse = "a"
+-- 鼠标悬停事件
+vim.o.mousemoveevent = true
 -- 退出vim询问是否保存
 vim.o.confirm = true
 -- 是否显示绝对行号
@@ -71,7 +73,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 -- 空格用⋅显示
 vim.opt.list = true
-vim.opt.listchars = { space = '·', tab = '··' }
+vim.opt.listchars = { space = "·", tab = "··" }
 -- 显示左侧图标指示列
 vim.wo.signcolumn = "yes"
 -- 分隔窗口的时候 新窗口从下面或者右边出现

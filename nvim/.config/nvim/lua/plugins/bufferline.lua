@@ -12,6 +12,12 @@ return {
 	},
 	opts = {
 		options = {
+			-- 鼠标悬停事件
+			hover = {
+				enabled = true,
+				delay = 0,
+				reveal = { "close" },
+			},
 			toggle_hidden_on_enter = true,
 			-- 侧边栏偏移设置
 			offsets = {
