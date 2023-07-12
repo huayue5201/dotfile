@@ -71,9 +71,9 @@ vim.o.spelllang = "en_us,cjk"
 -- 不区分大小写的搜索，除非搜索中包含大写
 vim.o.ignorecase = true
 vim.o.smartcase = true
--- 空格用⋅显示
-vim.opt.list = true
-vim.opt.listchars = { space = "·", tab = "··" }
+-- 显示特殊字符
+-- vim.opt.list = true
+-- vim.opt.listchars = { space = "▫", tab = "--" }
 -- 显示左侧图标指示列
 vim.wo.signcolumn = "yes"
 -- 分隔窗口的时候 新窗口从下面或者右边出现

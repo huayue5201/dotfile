@@ -13,17 +13,55 @@ return {
 	opts = {
 		-- neotree是最后一个窗口时自动关闭
 		close_if_last_window = true,
+		event_handlers = {
+			-- 打开文件自动关闭neo-tree
+			{
+				event = "file_opened",
+				handler = function(file_path)
+					--auto close
+					require("neo-tree").close_all()
+				end,
+			},
+			-- 平衡neo-tree打开和关闭的窗口大小
+			--{
+			--  event = "neo_tree_window_before_open",
+			--  handler = function(args)
+			--    print("neo_tree_window_before_open", vim.inspect(args))
+			--  end
+			--},
+			{
+				event = "neo_tree_window_after_open",
+				handler = function(args)
+					if args.position == "left" or args.position == "right" then
+						vim.cmd("wincmd =")
+					end
+				end,
+			},
+			--{
+			--  event = "neo_tree_window_before_close",
+			--  handler = function(args)
+			--    print("neo_tree_window_before_close", vim.inspect(args))
+			--  end
+			--},
+			{
+				event = "neo_tree_window_after_close",
+				handler = function(args)
+					if args.position == "left" or args.position == "right" then
+						vim.cmd("wincmd =")
+					end
+				end,
+			},
+		},
 		-- sources列表
 		sources = {
 			"filesystem",
 			"buffers",
 			"git_status",
-			-- "document_symbols",
 		},
 		-- wintar开启
 		source_selector = {
 			winbar = true,
-			-- statusline = true,
+			statusline = false,
 			sources = {
 				{ source = "filesystem", display_name = " 󰉓 Files " },
 				{ source = "buffers", display_name = "  Buffers" },
@@ -101,6 +139,59 @@ return {
 				["?"] = "show_help",
 				["<"] = "prev_source",
 				[">"] = "next_source",
+				["e"] = function()
+					vim.api.nvim_exec("Neotree focus filesystem left", true)
+				end,
+				["b"] = function()
+					vim.api.nvim_exec("Neotree focus buffers left", true)
+				end,
+				["g"] = function()
+					vim.api.nvim_exec("Neotree focus git_status left", true)
+				end,
+			},
+		},
+		filesystem = {
+			-- 使用系统默认程序打开文件
+			window = {
+				mappings = {
+					["o"] = "system_open",
+				},
+			},
+			commands = {
+				system_open = function(state)
+					local node = state.tree:get_node()
+					local path = node:get_id()
+					-- macOs: open file in default application in the background.
+					-- Probably you need to adapt the Linux recipe for manage path with spaces. I don't have a mac to try.
+					vim.api.nvim_command("silent !open -g " .. path)
+					-- Linux: open file in default application
+					vim.api.nvim_command(string.format("silent !xdg-open '%s'", path))
+				end,
+			},
+			-- harpoon集成
+			components = {
+				harpoon_index = function(config, node, state)
+					local Marked = require("harpoon.mark")
+					local path = node:get_id()
+					local succuss, index = pcall(Marked.get_index_of, path)
+					if succuss and index and index > 0 then
+						return {
+							text = string.format(" ⥤ %d", index), -- <-- Add your favorite harpoon like arrow here
+							highlight = config.highlight or "NeoTreeDirectoryIcon",
+						}
+					else
+						return {}
+					end
+				end,
+			},
+			renderers = {
+				file = {
+					{ "icon" },
+					{ "name", use_git_status_colors = true },
+					{ "harpoon_index" }, --> This is what actually adds the component in where you want it
+					{ "diagnostics" },
+					{ "git_status", highlight = "NeoTreeDimText" },
+				},
 			},
 		},
 	},

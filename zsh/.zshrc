@@ -95,6 +95,10 @@ zinit for \
     src"pure.zsh" \
   sindresorhus/pure
 
+# vim操作模式支持
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
+
 # https://github.com/cantino/mcfly
 zinit ice lucid wait"0a" from"gh-r" as"program" atload'eval "$(mcfly init zsh)"'
 zinit light cantino/mcfly

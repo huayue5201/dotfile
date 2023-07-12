@@ -12,6 +12,8 @@ return {
 	},
 	opts = {
 		options = {
+			mode = "buffers",
+			numbers = "ordinal",
 			-- 鼠标悬停事件
 			hover = {
 				enabled = true,

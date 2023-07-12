@@ -63,6 +63,8 @@ return {
 			close_fold_kinds = { "imports", "comment" },
 			preview = {
 				mappings = {
+					scrollU = "<C-u>",
+					scrollD = "<C-d>",
 					jumpTop = "[",
 					jumpBot = "]",
 				},
