@@ -5,7 +5,7 @@ return {
 	event = "VeryLazy",
 	init = function()
 		vim.o.timeout = true
-		vim.o.timeoutlen = 300
+		vim.o.timeoutlen = 500
 	end,
 	opts = {
 		marks = true, -- shows a list of your marks on ' and `
