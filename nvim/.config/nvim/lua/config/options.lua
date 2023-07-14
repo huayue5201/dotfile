@@ -81,4 +81,4 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 -- 稳定窗口
 vim.o.splitkeep = "screen"
-vim.o.splitkeep = "topline"
+-- vim.o.splitkeep = "topline"

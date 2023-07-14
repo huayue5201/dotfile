@@ -21,7 +21,7 @@ return {
 	config = function()
 		-- persisted扩展
 		require("telescope").load_extension("persisted")
-		-- esc键退出
+		-- 按键映射调用
 		local actions = require("telescope.actions")
 		-- telescope配置
 		require("telescope").setup({
@@ -72,9 +72,11 @@ return {
 				},
 			},
 			extensions = {
+				-- olimorris/persisted.nvim
 				persisted = {
 					layout_config = { width = 0.55, height = 0.55 },
 				},
+				-- https://github.com/nvim-telescope/telescope-fzy-native.nvim
 				fzy_native = {
 					override_generic_sorter = true,
 					override_file_sorter = true,
